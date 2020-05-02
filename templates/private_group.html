@@ -1,0 +1,35 @@
+{% extends "private_base.html" %}
+
+{% block content %}
+
+<div class="row" style="background: #ffff00">
+    {% set active_tasks = group.get_active_tasks() %}
+    <div class="container col-md-9">
+        <div class="row">
+            {% for task in active_tasks %}
+                <div class="card-body bg-light col-md-3 border border-primary" style="background: #ffff00">
+                    <h5 class="card-title">{{ task.name }}</h5>
+                    <p class="card-text">
+                        Создатель: {% if task.author_id == current_user.id %} <span style="color: green"> Вы </span> {% else %} {{ task.author.name }} {% endif %} <br>
+                        Исполнитель: {% if task.performer_id == current_user.id %} <span style="color: red"> Вы </span> {% else %} {{ task.performer.name }} {% endif %} <br>
+                        Статус: {{STATUS_TO_STR[task.status]}} <br>
+                        Дата создания: {{ task.creation_time.strftime('%d.%m.%y') }}
+                    </p>
+                    <a href="/group/{{ group.id }}/task/{{task.id}}" class="btn btn-primary">Детали</a>
+                </div>
+            {% endfor %}
+
+            <div class="card-body bg-light col-md-3 border border-primary" style="background: #ffff00">
+                <h5 class="card-title">Задать домашнюю работу</h5>
+                <p class="card-text">
+                    {% if len(active_tasks) == 0 %}
+                        В группе пока нет домашних работ <br>
+                    {% endif %}
+                </p>
+                <a href="/group/{{group.id}}/create_task" class="btn btn-warning">Задать домашнюю работу</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

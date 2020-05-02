@@ -1,0 +1,25 @@
+{% extends "private_base.html" %}
+
+{% block content %}
+
+<form action="" method="POST">
+
+    {{ form.csrf_token() }}
+
+    <div class="container border border-primary" style="background: #00ff00">
+        <div class="form-row">
+            <div class="col">
+                {{ form.id(class="form-control", placeholder="Введите ID класса, который дал вам учитель:") }}
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col">
+                {{form.submit(class="btn btn-warning")}}
+            </div>
+        </div>
+
+    </div>
+</form>
+
+{% endblock %}

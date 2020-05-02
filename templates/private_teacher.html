@@ -1,0 +1,33 @@
+{% extends "private_base.html" %}
+
+{% block private_navbar %}
+<li class="nav-item">
+    <a class="nav-link" href="/create_group">Создать класс</a>
+</li>
+{% endblock %}
+
+{% block content %}
+
+{% if not current_user.groups %}
+<div class="alert alert-danger">
+    Вы не создали ни одного класса. Нажмите "Создать класс" и введите название класса и количество учеников, чтобы его
+    создать
+</div>
+{% endif %}
+
+<div class="row" style="background: #ffff00">
+    {% for group in current_user.groups %}
+    <div class="card-body bg-light col-md-3 border border-success" style="background: #ffff00">
+        <h5 class="card-title">{{ group.name }} (ID: {{ group.id }})</h5>
+        <p class="card-text">
+            Учеников: {{ len(group.users) }} <br>
+            {% if group.admin_id == current_user.id %}
+        <p style="color: green">Вы учитель в этом классе</p>
+        {% endif %}
+        </p>
+        <a href="/group/{{ group.id }}" class="btn btn-warning">Войти в класс</a>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

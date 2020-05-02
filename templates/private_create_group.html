@@ -1,0 +1,35 @@
+{% extends "private_base.html" %}
+
+{% block content %}
+
+    <form action="" method="POST">
+
+        {{ form.csrf_token() }}
+
+        <div class="container border border-primary" style="background: #00ff00">
+            <div class="form-row">
+                <div class="col">
+                    {{ form.name(class="form-control", placeholder=form.name.label.text) }}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col">
+                    {{ form.max_members(class="form-control", placeholder=form.max_members.label.text) }}
+                    {% for error in form.max_members.errors %}
+                        <div class="alert alert-danger">{{error}}</div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col">
+                    {{form.submit(class="btn btn-warning")}}
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+
+{% endblock %}

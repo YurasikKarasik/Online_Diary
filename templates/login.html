@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block base_content %}
+
+    <form action="" method="POST">
+
+        {{ form.csrf_token() }}
+
+        <div class="container border border-primary" style="background: #00ff00">
+            <div class="form-row">
+                <div class="col">
+                {{ form.email(class="form-control", placeholder=form.email.label.text) }}
+                {% for error in form.email.errors %}
+                    <div class="alert alert-danger">{{error}}</div>
+                {% endfor %}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col">
+                    {{ form.password(class="form-control", placeholder=form.password.label.text) }}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col">
+                    <div class="from-check">
+                        {{ form.remember_me(class="") }}
+                        {{ form.remember_me.label(class="form-check-label") }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col">
+                    {{ form.submit(class="btn btn-primary btn-block") }}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col">
+                    <a href="/register" class="btn btn-warning">Регистрация на сайте OnlineDiary</a>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col">
+                    <a href="/teacher" class="btn btn-primary">Войти как учитель</a>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col">
+                    <a href="/register_teacher" class="btn btn-warning">Регистрация как учитель</a>
+                </div>
+            </div>
+
+            {% if message %}
+                <div class="alert alert-danger" role="alert">
+                    {{ message }}
+                </div>
+            {% endif %}
+        </div>
+
+    </form>
+
+{% endblock %}

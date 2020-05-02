@@ -1,0 +1,56 @@
+{% extends "private_base.html" %}
+
+{% block content %}
+
+    <form action="" method="POST">
+
+        {{ form.csrf_token() }}
+
+        <div class="container border border-primary" style="background: #00ff00">
+            <div class="form-row">
+                <div class="col">
+                {{ form.name(class="form-control", placeholder="Тема домашне работы:") }}
+                {% for error in form.name.errors %}
+                    <div class="alert alert-danger">{{error}}</div>
+                {% endfor %}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col">
+                    {{ form.description(class="form-control", placeholder="Содержание:") }}
+                    {% for error in form.description.errors %}
+                        <div class="alert alert-danger">{{error}}</div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            {% if edit %}
+            <div class="form-row">
+                <div class="col">
+                    {{ form.status.label(class='form-label') }}
+                    {{ form.status(class="form-control") }}
+                    {% for error in form.status.errors %}
+                        <div class="alert alert-danger">{{error}}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="form-row">
+                <div class="col">
+                    {{ form.submit(class="btn btn-primary btn-block", value='Изменить' if edit else 'Создать') }}
+                </div>
+            </div>
+
+            {% if message %}
+                <div class="alert alert-danger" role="alert">
+                    {{ message }}
+                </div>
+            {% endif %}
+
+        </div>
+
+    </form>
+
+{% endblock %}

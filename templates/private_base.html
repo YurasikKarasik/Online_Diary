@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block base_navbar %}
+
+<li class="nav-item">
+    <a class="nav-link" href="/private">Главная страница сайта OnlineMail</a>
+</li>
+
+{% block private_navbar %}
+{% endblock %}
+
+<li class="nav-item">
+    <a class="nav-link" href="/login">Выход</a>
+</li>
+
+
+{% endblock %}
+
+{% block base_content %}
+
+{% block content %}
+{% endblock %}
+
+{% endblock %}
